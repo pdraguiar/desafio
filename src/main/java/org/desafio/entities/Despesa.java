@@ -8,15 +8,28 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.desafio.enums.TipoRelatorioEnum;
+
 @Entity
 public class Despesa {
+	public static final String GET_DESPESAS_MENSAIS = 
+			"SELECT new Despesa(d.mes, SUM(d.valorLiquidado)) FROM Despesa d GROUP BY d.mes";
+	
+	public static final String GET_DESPESAS_POR_CATEGORIA = 
+			"SELECT new Despesa(d.categoriaEconomica.codigoCategoriaEconomica, SUM(d.valorLiquidado), 1) "
+			+ "FROM Despesa d GROUP BY d.categoriaEconomica.codigoCategoriaEconomica";
+	
+	public static final String GET_DESPESAS_POR_FONTE_RECURSO = 
+			"SELECT new Despesa(d.fonteRecurso.codigoFonteRecurso, SUM(d.valorLiquidado), 2) "
+			+ "FROM Despesa d GROUP BY d.fonteRecurso.codigoFonteRecurso";
+	
 	@Id
 	@GeneratedValue
 	private Long codigoDespesa;
 	
 	private Short ano;
 	
-	private Short mes;
+	private Byte mes;
 	
 	@ManyToOne
 	@JoinColumn(name = "codigoUnidade")
@@ -57,6 +70,42 @@ public class Despesa {
 	private BigDecimal valorPago;
 	
 	/**
+	 * Construtor utilizado para retorno customizado nos métodos que apuram os gastos por mês.
+	 * 
+	 * @param mes - mes da despesa.
+	 * @param valorLiquidado - total gasto no mês.
+	 */
+	public Despesa(Byte mes, BigDecimal valorLiquidado) {
+		this.mes = mes;
+		this.valorLiquidado = valorLiquidado;
+	}
+	
+	/**
+	 * Construtor utilizado para retorno customizado nos métodos que apuram os gastos por categoria economica
+	 * e fonte de recurso.
+	 * 
+	 * @param mes - mes da despesa.
+	 * @param valorLiquidado - total gasto no mês.
+	 * @param tipoRelatorio - identifica qual tipo de somatório está sendo criado.
+	 * 1 = categoria economica, 2 = fonte de recurso.
+	 */
+	public Despesa(Long codigoEntidade, BigDecimal valorLiquidado, Integer tipoRelatorio) {
+		if (TipoRelatorioEnum.TIPO_RELATORIO_CATEGORIA.getCodigoTipoRelatorio().equals(tipoRelatorio)) {
+			CategoriaEconomica categoriaEconomica = new CategoriaEconomica();
+			categoriaEconomica.setCodigoCategoriaEconomica(codigoEntidade);
+			
+			this.categoriaEconomica = categoriaEconomica;
+		} else if (TipoRelatorioEnum.TIPO_RELATORIO_FONTE_RECURSO.getCodigoTipoRelatorio().equals(tipoRelatorio)) {
+			FonteRecurso fonteRecurso = new FonteRecurso();
+			fonteRecurso.setCodigoFonteRecurso(codigoEntidade);
+			
+			this.fonteRecurso = fonteRecurso;
+		}
+		
+		this.valorLiquidado = valorLiquidado;
+	}
+	
+	/**
 	 * @return the id
 	 */
 	public Long getCodigoDespesa() {
@@ -87,14 +136,14 @@ public class Despesa {
 	/**
 	 * @return the mes
 	 */
-	public Short getMes() {
+	public Byte getMes() {
 		return mes;
 	}
 
 	/**
 	 * @param mes the mes to set
 	 */
-	public void setMes(Short mes) {
+	public void setMes(Byte mes) {
 		this.mes = mes;
 	}
 

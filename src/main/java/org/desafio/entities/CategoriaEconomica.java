@@ -15,14 +15,14 @@ public class CategoriaEconomica {
 	/**
 	 * @return the id
 	 */
-	public Long getCategoriaEconomica() {
+	public Long getCodigoCategoriaEconomica() {
 		return codigoCategoriaEconomica;
 	}
 
 	/**
 	 * @param codigoCategoriaEconomica the id to set
 	 */
-	public void setCategoriaEconomica(Long codigoCategoriaEconomica) {
+	public void setCodigoCategoriaEconomica(Long codigoCategoriaEconomica) {
 		this.codigoCategoriaEconomica = codigoCategoriaEconomica;
 	}
 

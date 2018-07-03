@@ -40,4 +40,23 @@ public class DespesasFacade {
 		return iDespesasService.getDespesasPorFonteRecurso();
 	}
 
+	/**
+	 * Cria uma nova despesa.
+	 * 
+	 * @param despesa - despesa a ser criada.
+	 * @return Despesa
+	 */
+	public Despesa create(Despesa despesa) {
+		return iDespesasService.create(despesa);
+	}
+
+	/**
+	 * Atualiza uma despesa existente.
+	 * 
+	 * @param despesa - despesa a ser atualizada.
+	 * @return Despesa
+	 */
+	public Despesa update(Despesa despesa) {
+		return iDespesasService.update(despesa);
+	}
 }

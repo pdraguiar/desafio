@@ -1,17 +1,14 @@
-package org.desafio.entities;
+package org.desafio.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
-@Entity
-public class ModalidadeLicitacao {
-	@Id
-	@GeneratedValue
+@XmlRootElement(name = "modalidadeLicitacao")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class ModalidadeLicitacaoDTO {
 	private Long codigoModalidadeLicitacao;
-	
-	private String nome;
-	
+
 	/**
 	 * @return the codigoModalidadeLicitacao
 	 */
@@ -25,18 +22,5 @@ public class ModalidadeLicitacao {
 	public void setCodigoModalidadeLicitacao(Long codigoModalidadeLicitacao) {
 		this.codigoModalidadeLicitacao = codigoModalidadeLicitacao;
 	}
-	
-	/**
-	 * @return the nome
-	 */
-	public String getNome() {
-		return nome;
-	}
-
-	/**
-	 * @param name the nome to set
-	 */
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+		
 }

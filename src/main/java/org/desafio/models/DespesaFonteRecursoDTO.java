@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "despesaFonteRecurso")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class DespesaFonteRecursoEBO {
+public class DespesaFonteRecursoDTO {
 	private Long codigoFonteRecurso;
 	private BigDecimal valorDespesas;
 	

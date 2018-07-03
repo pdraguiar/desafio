@@ -70,6 +70,13 @@ public class Despesa {
 	private BigDecimal valorPago;
 	
 	/**
+	 * Construtor vazio, necessário para utilização do ModelMapper.
+	 */
+	public Despesa() {
+		
+	}
+	
+	/**
 	 * Construtor utilizado para retorno customizado nos métodos que apuram os gastos por mês.
 	 * 
 	 * @param mes - mes da despesa.

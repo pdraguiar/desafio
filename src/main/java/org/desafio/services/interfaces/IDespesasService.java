@@ -26,4 +26,20 @@ public interface IDespesasService {
 	 * @return List<Despesa>, onde cada elemento contém o somatório das despesas da respectiva fonte de recurso.
 	 */
 	public List<Despesa> getDespesasPorFonteRecurso();
+
+	/**
+	 * Cria uma nova despesa.
+	 * 
+	 * @param despesa - despesa a ser criada.
+	 * @return Despesa
+	 */
+	public Despesa create(Despesa despesa);
+	
+	/**
+	 * Atualiza uma despesa existente.
+	 * 
+	 * @param despesa - despesa a ser atualizada.
+	 * @return Despesa
+	 */
+	public Despesa update(Despesa despesa);
 }

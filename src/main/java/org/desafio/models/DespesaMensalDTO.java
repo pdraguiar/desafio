@@ -6,23 +6,22 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "despesaCategoria")
+@XmlRootElement(name = "despesaMensal")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class DespesaCategoriaEBO {
-	private Long codigoCategoriaEconomica;
+public class DespesaMensalDTO {
+	private Byte mes;
 	private BigDecimal valorDespesas;
-	
 	/**
-	 * @return the codigoCategoriaEconomica
+	 * @return the mes
 	 */
-	public Long getCodigoCategoriaEconomica() {
-		return codigoCategoriaEconomica;
+	public Byte getMes() {
+		return mes;
 	}
 	/**
-	 * @param codigoCategoriaEconomica the codigoCategoriaEconomica to set
+	 * @param mes the mes to set
 	 */
-	public void setCodigoCategoriaEconomica(Long codigoCategoriaEconomica) {
-		this.codigoCategoriaEconomica = codigoCategoriaEconomica;
+	public void setMes(Byte mes) {
+		this.mes = mes;
 	}
 	/**
 	 * @return the valorDespesas

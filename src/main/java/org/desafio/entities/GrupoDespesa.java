@@ -13,16 +13,16 @@ public class GrupoDespesa {
 	private String nome;
 	
 	/**
-	 * @return the id
+	 * @return the codigoGrupoDespesa
 	 */
-	public Long getGrupoDespesa() {
+	public Long getCodigoGrupoDespesa() {
 		return codigoGrupoDespesa;
 	}
 
 	/**
 	 * @param codigoGrupoDespesa the id to set
 	 */
-	public void setCategoriaEconomica(Long codigoGrupoDespesa) {
+	public void setCodigoGrupoDespesa(Long codigoGrupoDespesa) {
 		this.codigoGrupoDespesa = codigoGrupoDespesa;
 	}
 

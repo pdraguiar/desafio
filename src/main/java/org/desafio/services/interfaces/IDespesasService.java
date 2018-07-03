@@ -3,6 +3,7 @@ package org.desafio.services.interfaces;
 import java.util.List;
 
 import org.desafio.entities.Despesa;
+import org.springframework.data.domain.Page;
 
 public interface IDespesasService {
 	
@@ -49,4 +50,13 @@ public interface IDespesasService {
 	 * @return Despesa
 	 */
 	public Despesa buscar(Long codigoDespesa);
+
+	/**
+	 * Lista as despesas cadastradas.
+	 *
+	 * @param pagina - pagina requisitada.
+	 * @param porPagina - itens por página.
+	 * @return Page<Despesa>
+	 */
+	public Page<Despesa> listarDespesas(Integer pagina, Integer porPagina);
 }

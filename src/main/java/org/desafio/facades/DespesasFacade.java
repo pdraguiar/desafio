@@ -5,6 +5,7 @@ import java.util.List;
 import org.desafio.entities.Despesa;
 import org.desafio.services.interfaces.IDespesasService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -67,5 +68,16 @@ public class DespesasFacade {
 	 */
 	public Despesa buscar(Long codigoDespesa) {
 		return iDespesasService.buscar(codigoDespesa);
+	}
+
+	/**
+	 * Lista as despesas cadastradas.
+	 *
+	 * @param pagina - pagina requisitada.
+	 * @param porPagina - itens por página.
+	 * @return Page<Despesa>
+	 */
+	public Page<Despesa> listarDespesas(Integer pagina, Integer porPagina) {
+		return iDespesasService.listarDespesas(pagina, porPagina);
 	}
 }

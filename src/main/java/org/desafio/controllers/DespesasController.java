@@ -13,9 +13,12 @@ import org.desafio.models.DespesaDTO;
 import org.desafio.models.DespesaFonteRecursoDTO;
 import org.desafio.models.DespesaMensalDTO;
 import org.desafio.models.DespesasAgrupadasDTO;
+import org.desafio.models.ListaDespesasDTO;
 import org.desafio.utils.ValidacaoUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -35,6 +39,36 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class DespesasController {
 	@Autowired
 	private DespesasFacade despesasFacade;
+	
+	/**
+	 * Lista as despesas cadastradas.
+	 *
+	 * @param pagina - pagina requisitada.
+	 * @param porPagina - itens por página.
+	 * @return ResponseEntity<ListaDespesasDTO>
+	 */
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ListaDespesasDTO> listarDespesas(@RequestParam(defaultValue = "0") Integer pagina, 
+	        @RequestParam(defaultValue = "10") Integer porPagina) {
+		ListaDespesasDTO retorno = new ListaDespesasDTO();
+		List<DespesaDTO> listaDespesas = new ArrayList<DespesaDTO>();
+		Page<Despesa> despesas = despesasFacade.listarDespesas(pagina, porPagina);
+		HttpHeaders responseHeaders = new HttpHeaders();
+		
+		if (ValidacaoUtil.isNotNull(despesas)) {
+			ModelMapper modelMapper = new ModelMapper();
+			
+			for (Despesa despesa : despesas.getContent()) {
+				listaDespesas.add(modelMapper.map(despesa, DespesaDTO.class));
+			}
+			
+			retorno.setDespesas(listaDespesas);
+		    responseHeaders.set("X-Total-Registros", String.valueOf(despesas.getTotalElements()));
+		    responseHeaders.set("X-Quantidade-Paginas", String.valueOf(despesas.getTotalPages()));
+		}
+		
+		return new ResponseEntity<ListaDespesasDTO>(retorno, responseHeaders, HttpStatus.OK);
+	}
 	
 	/**
 	 * Retorna as depesas mensais.
@@ -122,6 +156,7 @@ public class DespesasController {
 	/**
 	 * Retorna uma despesa específica, baseado no codigoDespesa.
 	 *
+	 * @param codigoDespesa - codigo da despesa.
 	 * @return ResponseEntity<DespesaDTO>
 	 */
 	@GetMapping(path="/{codigoDespesa}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -156,6 +191,7 @@ public class DespesasController {
 	/**
 	 * Atualiza uma despesa existente.
 	 * 
+	 * @param codigoDespesa - codigo da despesa.
 	 * @param despesa - despesa a ser atualizada.
 	 * @return ResponseEntity<DespesaDTO>
 	 */

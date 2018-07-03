@@ -118,6 +118,21 @@ public class DespesasController {
 		
 		return new ResponseEntity<DespesasAgrupadasDTO>(retorno,HttpStatus.OK);
 	}
+	
+	/**
+	 * Retorna uma despesa específica, baseado no codigoDespesa.
+	 *
+	 * @return ResponseEntity<DespesaDTO>
+	 */
+	@GetMapping(path="/{codigoDespesa}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<DespesaDTO> buscar(@PathVariable("codigoDespesa") Long codigoDespesa) {
+		Despesa despesa = despesasFacade.buscar(codigoDespesa);
+		
+		ModelMapper modelMapper = new ModelMapper();
+		DespesaDTO despesaDTO = modelMapper.map(despesa, DespesaDTO.class);
+		
+		return new ResponseEntity<DespesaDTO>(despesaDTO,HttpStatus.OK);
+	}
 
 	/**
 	 * Cria uma nova despesa.

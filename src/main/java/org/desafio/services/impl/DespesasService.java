@@ -21,7 +21,6 @@ public class DespesasService implements IDespesasService{
 	 * @see org.desafio.services.interfaces.IDespesasService#getDespesasMensais()
 	 */
 	@Override
-	@Transactional(readOnly = true)
 	public List<Despesa> getDespesasMensais() {
 		List<Despesa> despesasMensais = despesasRepository.getDespesasMensais();
 		
@@ -32,7 +31,6 @@ public class DespesasService implements IDespesasService{
 	 * @see org.desafio.services.interfaces.IDespesasService#getDespesasPorCategoria()
 	 */
 	@Override
-	@Transactional(readOnly = true)
 	public List<Despesa> getDespesasPorCategoria() {
 		List<Despesa> despesasCategoria = despesasRepository.getDespesasPorCategoria();
 		
@@ -43,7 +41,6 @@ public class DespesasService implements IDespesasService{
 	 * @see org.desafio.services.interfaces.IDespesasService#getDespesasPorFonteRecurso()
 	 */
 	@Override
-	@Transactional(readOnly = true)
 	public List<Despesa> getDespesasPorFonteRecurso() {
 		List<Despesa> despesasCategoria = despesasRepository.getDespesasPorFonteRecurso();
 		
@@ -124,5 +121,25 @@ public class DespesasService implements IDespesasService{
 		}
 		
 		return isValido;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.desafio.services.interfaces.IDespesasService#buscar(java.lang.Long)
+	 */
+	@Override
+	public Despesa buscar(Long codigoDespesa) {
+		Despesa retorno = null;
+		
+		if (ValidacaoUtil.isNotNull(codigoDespesa)) {
+			retorno = despesasRepository.findOne(codigoDespesa);
+			
+			if (!ValidacaoUtil.isNotNull(retorno)) {
+				throw new ErroDeNegocioException(MensagemErroEnum.ENTIDADE_NAO_ENCONTRADA.getValor());
+			}
+		} else {
+			throw new ErroDeNegocioException(MensagemErroEnum.CAMPOS_MANDATORIOS.getValor());
+		}
+		
+		return retorno;
 	}
 }

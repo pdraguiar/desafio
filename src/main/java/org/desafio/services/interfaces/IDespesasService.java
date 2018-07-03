@@ -42,4 +42,11 @@ public interface IDespesasService {
 	 * @return Despesa
 	 */
 	public Despesa update(Despesa despesa);
+
+	/**
+	 * Retorna uma despesa específica, baseado no codigoDespesa.
+	 *
+	 * @return Despesa
+	 */
+	public Despesa buscar(Long codigoDespesa);
 }

@@ -59,4 +59,13 @@ public class DespesasFacade {
 	public Despesa update(Despesa despesa) {
 		return iDespesasService.update(despesa);
 	}
+
+	/**
+	 * Retorna uma despesa específica, baseado no codigoDespesa.
+	 *
+	 * @return Despesa
+	 */
+	public Despesa buscar(Long codigoDespesa) {
+		return iDespesasService.buscar(codigoDespesa);
+	}
 }

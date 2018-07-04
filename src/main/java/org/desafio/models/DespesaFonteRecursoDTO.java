@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DespesaFonteRecursoDTO {
 	private Long codigoFonteRecurso;
+	private String nomeFonteRecurso;
 	private BigDecimal valorDespesas;
 	
 	/**
@@ -35,6 +36,18 @@ public class DespesaFonteRecursoDTO {
 	 */
 	public void setCodigoFonteRecurso(Long codigoFonteRecurso) {
 		this.codigoFonteRecurso = codigoFonteRecurso;
+	}
+	/**
+	 * @return the nomeFonteRecurso
+	 */
+	public String getNomeFonteRecurso() {
+		return nomeFonteRecurso;
+	}
+	/**
+	 * @param nomeFonteRecurso the nomeFonteRecurso to set
+	 */
+	public void setNomeFonteRecurso(String nomeFonteRecurso) {
+		this.nomeFonteRecurso = nomeFonteRecurso;
 	}
 	
 	

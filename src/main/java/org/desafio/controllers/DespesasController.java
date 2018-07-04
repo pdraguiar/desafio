@@ -114,6 +114,7 @@ public class DespesasController {
 				DespesaCategoriaDTO despesaEBO = new DespesaCategoriaDTO();
 				despesaEBO.setCodigoCategoriaEconomica(
 						despesaCategoria.getCategoriaEconomica().getCodigoCategoriaEconomica());
+				despesaEBO.setNomeCategoriaEconomica(despesaCategoria.getCategoriaEconomica().getNome());
 				despesaEBO.setValorDespesas(despesaCategoria.getValorLiquidado());
 				
 				listaDespesas.add(despesaEBO);
@@ -140,8 +141,8 @@ public class DespesasController {
 			
 			for (Despesa despesaCategoria : despesas) {
 				DespesaFonteRecursoDTO despesaEBO = new DespesaFonteRecursoDTO();
-				despesaEBO.setCodigoFonteRecurso(
-						despesaCategoria.getFonteRecurso().getCodigoFonteRecurso());
+				despesaEBO.setCodigoFonteRecurso(despesaCategoria.getFonteRecurso().getCodigoFonteRecurso());
+				despesaEBO.setNomeFonteRecurso(despesaCategoria.getFonteRecurso().getNome());
 				despesaEBO.setValorDespesas(despesaCategoria.getValorLiquidado());
 				
 				listaDespesas.add(despesaEBO);

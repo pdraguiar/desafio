@@ -16,12 +16,13 @@ public class Despesa {
 			"SELECT new Despesa(d.mes, SUM(d.valorLiquidado)) FROM Despesa d GROUP BY d.mes";
 	
 	public static final String GET_DESPESAS_POR_CATEGORIA = 
-			"SELECT new Despesa(d.categoriaEconomica.codigoCategoriaEconomica, SUM(d.valorLiquidado), 1) "
-			+ "FROM Despesa d GROUP BY d.categoriaEconomica.codigoCategoriaEconomica";
+			"SELECT new Despesa(d.categoriaEconomica.codigoCategoriaEconomica, d.categoriaEconomica.nome, "
+			+ "SUM(d.valorLiquidado), 1) FROM Despesa d "
+			+ "GROUP BY d.categoriaEconomica.codigoCategoriaEconomica, d.categoriaEconomica.nome";
 	
 	public static final String GET_DESPESAS_POR_FONTE_RECURSO = 
-			"SELECT new Despesa(d.fonteRecurso.codigoFonteRecurso, SUM(d.valorLiquidado), 2) "
-			+ "FROM Despesa d GROUP BY d.fonteRecurso.codigoFonteRecurso";
+			"SELECT new Despesa(d.fonteRecurso.codigoFonteRecurso, d.fonteRecurso.nome, SUM(d.valorLiquidado), 2) "
+			+ "FROM Despesa d GROUP BY d.fonteRecurso.codigoFonteRecurso, d.fonteRecurso.nome";
 	
 	@Id
 	@GeneratedValue
@@ -91,20 +92,23 @@ public class Despesa {
 	 * Construtor utilizado para retorno customizado nos métodos que apuram os gastos por categoria economica
 	 * e fonte de recurso.
 	 * 
-	 * @param mes - mes da despesa.
+	 * @param codigoEntidade - identificador da entidade.
+	 * @param nomeEntidade - nome referente à entidade.
 	 * @param valorLiquidado - total gasto no mês.
 	 * @param tipoRelatorio - identifica qual tipo de somatório está sendo criado.
 	 * 1 = categoria economica, 2 = fonte de recurso.
 	 */
-	public Despesa(Long codigoEntidade, BigDecimal valorLiquidado, Integer tipoRelatorio) {
+	public Despesa(Long codigoEntidade, String nomeEntidade, BigDecimal valorLiquidado, Integer tipoRelatorio) {
 		if (TipoRelatorioEnum.TIPO_RELATORIO_CATEGORIA.getCodigoTipoRelatorio().equals(tipoRelatorio)) {
 			CategoriaEconomica categoriaEconomica = new CategoriaEconomica();
 			categoriaEconomica.setCodigoCategoriaEconomica(codigoEntidade);
+			categoriaEconomica.setNome(nomeEntidade);
 			
 			this.categoriaEconomica = categoriaEconomica;
 		} else if (TipoRelatorioEnum.TIPO_RELATORIO_FONTE_RECURSO.getCodigoTipoRelatorio().equals(tipoRelatorio)) {
 			FonteRecurso fonteRecurso = new FonteRecurso();
 			fonteRecurso.setCodigoFonteRecurso(codigoEntidade);
+			fonteRecurso.setNome(nomeEntidade);
 			
 			this.fonteRecurso = fonteRecurso;
 		}

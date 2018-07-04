@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DespesaCategoriaDTO {
 	private Long codigoCategoriaEconomica;
+	private String nomeCategoriaEconomica;
 	private BigDecimal valorDespesas;
 	
 	/**
@@ -23,6 +24,18 @@ public class DespesaCategoriaDTO {
 	 */
 	public void setCodigoCategoriaEconomica(Long codigoCategoriaEconomica) {
 		this.codigoCategoriaEconomica = codigoCategoriaEconomica;
+	}
+	/**
+	 * @return the nomeCategoriaEconomica
+	 */
+	public String getNomeCategoriaEconomica() {
+		return nomeCategoriaEconomica;
+	}
+	/**
+	 * @param nomeCategoriaEconomica the nomeCategoriaEconomica to set
+	 */
+	public void setNomeCategoriaEconomica(String nomeCategoriaEconomica) {
+		this.nomeCategoriaEconomica = nomeCategoriaEconomica;
 	}
 	/**
 	 * @return the valorDespesas

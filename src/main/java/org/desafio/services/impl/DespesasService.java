@@ -11,6 +11,7 @@ import org.desafio.utils.ValidacaoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -150,7 +151,8 @@ public class DespesasService implements IDespesasService{
 	 */
 	@Override
 	public Page<Despesa> listarDespesas(Integer pagina, Integer porPagina) {
-		Page<Despesa> despesas = despesasRepository.findAll(new PageRequest(pagina, porPagina));
+		Page<Despesa> despesas = despesasRepository.findAll(new PageRequest(pagina, porPagina, 
+				Sort.Direction.DESC, "codigoDespesa"));
 		
 		return despesas;
 	}

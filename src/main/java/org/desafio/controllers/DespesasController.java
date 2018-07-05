@@ -63,7 +63,8 @@ public class DespesasController {
 			}
 			
 			retorno.setDespesas(listaDespesas);
-		    responseHeaders.set("X-Total-Registros", String.valueOf(despesas.getTotalElements()));
+			responseHeaders.set("Access-Control-Expose-Headers", "X-Total-Registros");
+			responseHeaders.set("X-Total-Registros", String.valueOf(despesas.getTotalElements()));
 		    responseHeaders.set("X-Quantidade-Paginas", String.valueOf(despesas.getTotalPages()));
 		}
 		

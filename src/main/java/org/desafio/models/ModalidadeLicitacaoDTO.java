@@ -8,6 +8,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ModalidadeLicitacaoDTO {
 	private Long codigoModalidadeLicitacao;
+	private String nome;
+
+	/**
+	 * @return the nome
+	 */
+	public String getNome() {
+		return nome;
+	}
+
+	/**
+	 * @param nome the nome to set
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
 	/**
 	 * @return the codigoModalidadeLicitacao

@@ -105,4 +105,22 @@ public class DominiosService implements IDominiosService{
 		
 		return lista;
 	}
+
+	/* (non-Javadoc)
+	 * @see org.desafio.services.interfaces.IDominiosService#getUnidadesByOrgao(java.lang.Long)
+	 */
+	@Override
+	public List<DominioDTO> getUnidadesByOrgao(Long codigoOrgao) {
+		List<Unidade> target = new ArrayList<>();
+		List<DominioDTO> lista = new ArrayList<DominioDTO>();
+		
+		Orgao orgao = new Orgao();
+		orgao.setCodigoOrgao(codigoOrgao);
+		
+		unidadeRepository.findAllByOrgaoOrderByNome(orgao).forEach(target::add);
+		
+		lista = DominiosUtil.atribuirDominiosUnidade(lista, target);
+		
+		return lista;
+	}
 }

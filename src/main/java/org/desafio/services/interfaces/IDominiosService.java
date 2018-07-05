@@ -13,5 +13,13 @@ public interface IDominiosService {
 	 * @return List<DominioDTO>
 	 */
 	public List<DominioDTO> listar(String nomeDominio);
+
+	/**
+	 * Carrega os dominios de unidade atrelados a determinado orgão.
+	 *
+	 * @param codigoOrgao - identificador do órgão.
+	 * @return ResponseEntity<ListaDespesasDTO>
+	 */
+	public List<DominioDTO> getUnidadesByOrgao(Long codigoOrgao);
 	
 }

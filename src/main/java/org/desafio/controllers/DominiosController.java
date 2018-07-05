@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +33,22 @@ public class DominiosController {
 	public ResponseEntity<ListaDominiosDTO> listar(@RequestParam String nomeDominio) {
 		ListaDominiosDTO retorno = new ListaDominiosDTO();
 		List<DominioDTO> lista = dominiosFacade.listar(nomeDominio);
+		
+		retorno.setDominios(lista);
+		
+		return new ResponseEntity<ListaDominiosDTO>(retorno, HttpStatus.OK);
+	}
+	
+	/**
+	 * Carrega os dominios de unidade atrelados a determinado orgão.
+	 *
+	 * @param codigoOrgao - identificador do órgão.
+	 * @return ResponseEntity<ListaDespesasDTO>
+	 */
+	@GetMapping(path="/unidadesPorOrgao/{codigoOrgao}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ListaDominiosDTO> getUnidadesByOrgao(@PathVariable("codigoOrgao") Long codigoOrgao) {
+		ListaDominiosDTO retorno = new ListaDominiosDTO();
+		List<DominioDTO> lista = dominiosFacade.getUnidadesByOrgao(codigoOrgao);
 		
 		retorno.setDominios(lista);
 		

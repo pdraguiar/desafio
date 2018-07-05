@@ -22,4 +22,14 @@ public class DominiosFacade {
 	public List<DominioDTO> listar(String nomeDominio) {
 		return iDominiosService.listar(nomeDominio);
 	}
+
+	/**
+	 * Carrega os dominios de unidade atrelados a determinado orgão.
+	 *
+	 * @param codigoOrgao - identificador do órgão.
+	 * @return ResponseEntity<ListaDespesasDTO>
+	 */
+	public List<DominioDTO> getUnidadesByOrgao(Long codigoOrgao) {
+		return iDominiosService.getUnidadesByOrgao(codigoOrgao);
+	}
 }

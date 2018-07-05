@@ -7,20 +7,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "orgao")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class OrgaoDTO {
-	private String codigoOrgao;
+	private Long codigoOrgao;
 	private String nome;
 
 	/**
 	 * @return the codigoOrgao
 	 */
-	public String getCodigoOrgao() {
+	public Long getCodigoOrgao() {
 		return codigoOrgao;
 	}
 
 	/**
 	 * @param codigoOrgao the codigoOrgao to set
 	 */
-	public void setCodigoOrgao(String codigoOrgao) {
+	public void setCodigoOrgao(Long codigoOrgao) {
 		this.codigoOrgao = codigoOrgao;
 	}
 

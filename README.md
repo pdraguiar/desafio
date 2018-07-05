@@ -18,7 +18,26 @@ Rest API que gerencia gastos com despesas no Recife em 2017.
      ```sh
      $ clean package
      ```
-     
+
+# Principais Arquivos
+
+- Os pontos de entrada da aplicação, são os controllers, localizados dentro do pacote org.desafio.controllers.
+- Existem 2 controllers na aplicação, o principal é o DespesasController.java, que é o que trata todo o CRUD relacionado às despesas em si. 
+- O segundo controller (DominiosController.java) foi utilizado para facilitar o preenchimento dos combo-boxes do frontend, já que ele é utilizado para buscar os valores existentes nas tabelas que fazem parte do cadastro da despesa. Exemplo: para cadastrar uma despesa, tenho que escolher um órgão. Como a tabela de órgãos tem muitos registros, não fazia sentido utilizar valores mocados no front-end, para isso, utilizo o DominosController para me retornar todas as opções de órgãos.
+
+# Fluxo Padrão do Serviço
+
+- Toda chamada ao serviço, segue um padrão de chamadas entre as camadas, que é o seguinte:
+
+Controller -> Facade -> Service (IService) -> Repository
+
+Controller: ponto de entrada das requisições
+Facade: Ponto de entrada único para a camada de negócio
+IService: Interface com os métodos da cama de serviço.
+Service: Implementação de regra de negócio
+Repository: Acesso ao BD através de ORM
+
+
 # Executando a aplicação
 
 - Para subir o serviço, basta buscar a classe Boot.java (dentro do pacote org.desafio) , clicar com o botão direito, opção Run As > Java Application.
